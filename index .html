@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AHMAD HAFIY's Student Bento Grid Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Color Palette */
+            --color-background: #f8f9fa; /* Soft White/Light Grey */
+            --color-surface: #ffffff; /* Clean White */
+            --color-text-primary: #212529; /* Dark Grey/Black */
+            --color-text-secondary: #6c757d; /* Medium Grey */
+            --color-accent: #004d99; /* Deep Ocean Blue (New UMT Theme) */
+            --color-border: #e9ecef; /* Very Light Grey Border */
+
+            /* Font */
+            --font-family-sans: 'Inter', sans-serif;
+
+            /* Spacing */
+            --spacing-unit: 1rem;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: var(--font-family-sans);
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            margin: 0;
+            padding: 2rem var(--spacing-unit);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- Bento Grid Layout --- */
+
+        .bento-grid {
+            display: grid;
+            gap: var(--spacing-unit);
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto;
+        }
+
+        .bento-card {
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Grid Item Sizes (Desktop Specific) */
+        .card-profile {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .card-playlist {
+            grid-column: span 3;
+        }
+
+        /* Mobile Responsiveness: Stacked vertically (1 column) */
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-profile,
+            .card-playlist {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            body {
+                padding: 1rem;
+            }
+        }
+
+        /* --- Card Content Styling --- */
+
+        .card-header {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-header .icon {
+            margin-right: 0.5rem;
+            color: var(--color-accent);
+        }
+
+        /* Profile Card */
+        .profile-name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+        }
+
+        .profile-tagline {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+
+        .profile-details {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin-right: 1rem;
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .social-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Location Card */
+        .location-campus {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        
+        .location-city {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+        }
+
+        .location-time {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            color: var(--color-accent);
+        }
+
+        /* Tech Stack & Case Study Cards */
+        .subjects-list {
+            flex-grow: 1;
+        }
+
+        .subjects-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            /* Use a column layout for better subject display on large screens */
+            columns: 2; 
+        }
+
+        @media (max-width: 768px) {
+            .subjects-list ul {
+                columns: 1;
+            }
+        }
+
+        .subjects-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--color-border);
+            color: var(--color-text-primary);
+            break-inside: avoid-column; /* Prevent subjects from splitting across columns */
+        }
+
+        .subjects-list li:last-child {
+            border-bottom: none;
+        }
+
+        .case-study-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Hobby Card */
+        .hobby-activity {
+            font-size: 1.2rem;
+            font-weight: 600;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: #f0f8ff; /* Very subtle light blue background for contrast */
+            border-radius: 8px;
+            padding: 0.5rem;
+            color: var(--color-accent);
+        }
+
+        /* Playlist Card (Footer/Wide) */
+        .playlist-content {
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 1rem 0;
+            background-color: var(--color-border);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="bento-grid">
+
+            <div class="bento-card card-profile">
+                <div class="card-header"><span class="icon">👤</span> Profile & Links</div>
+                <h1 class="profile-name">AHMAD HAFIY BIN SHAHRIL EFFENDY</h1>
+                <p class="profile-tagline">'Innovating food safety.'</p>
+                <p class="profile-details">
+                    **Program:** Food Technology (B.Sc.)<br>
+                    **Year:** Year 1
+                </p>
+                <div class="social-links">
+                    <a href="#" target="_blank">LinkedIn</a>
+                    <a href="#" target="_blank">GitHub</a>
+                    <a href="#" target="_blank">UMT Portal</a>
+                </div>
+            </div>
+
+            <div class="bento-card card-location">
+                <div class="card-header"><span class="icon">📍</span> Location & Time</div>
+                <div class="location-campus">UMT Main Campus</div>
+                <div class="location-city">Kuala Nerus, Terengganu</div>
+                <div class="location-time">14:21 PM</div> </div>
+
+            <div class="bento-card card-subjects">
+                <div class="card-header"><span class="icon">📚</span> Core Subjects</div>
+                <div class="subjects-list">
+                    <ul>
+                        <li>Bio Kimia</li>
+                        <li>Kimia Fizik</li>
+                        <li>Kimia Organik</li>
+                        <li>Sistem Komputer Dan Aplikasi</li>
+                        <li>Etika</li>
+                        <li>Matematik</li>
+                        <li>Anti-Rasuah</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bento-card card-case-study">
+                <div class="card-header"><span class="icon">🔬</span> Recent Project</div>
+                <div class="case-study-content">
+                    <h3 class="case-study-title">Lab Meat using grasshopper</h3>
+                    <p class="card-text-secondary">
+                        Analyzing texture profiles of processed meat derived from alternative protein sources, specifically focusing on grasshopper applications.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bento-card card-hobby">
+                <div class="card-header"><span class="icon">🏊</span> Campus Activity</div>
+                <div class="hobby-activity">
+                    Evening Swim at Swimming Pool UMT.
+                </div>
+            </div>
+
+            <div class="bento-card card-playlist">
+                <div class="card-header"><span class="icon">🎧</span> Current Study Playlist</div>
+                <div class="playlist-content">
+                    [Placeholder for Spotify/Music Player Embed] - Instrumental Jazz for Focus
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
