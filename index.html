@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AHMAD HAFIY's Student Bento Grid Landing Page (Image Update)</title>
+    <title>AHMAD HAFIY's Student Bento Grid Landing Page (Lab Timer Update)</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -69,37 +69,34 @@
         .card-profile {
             grid-column: span 2;
             grid-row: span 2;
-            
-           background-image: url('bg.jpg');
+            background-image: url('bg.jpg');
             background-size: cover;
             background-position: center;
-            background-color: #333; /* Darker fallback */
-            color: white; /* Text color shift for dark background */
+            background-color: #333;
+            color: white;
         }
         
-        /* Ensure text within the profile card is white */
         .card-profile .card-header,
         .card-profile .profile-details,
         .card-profile .profile-tagline {
             color: white;
         }
 
-        /* Make accent colors pop on the dark background */
-        .card-profile .profile-tagline {
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-        }
-
         .card-profile .social-links a {
-            color: #90d3ff; /* Lighter blue for contrast */
-            border-color: #90d3ff;
+            display: inline-block;
+            margin-right: 10px;
+            padding: 5px 15px;
+            text-decoration: none;
+            color: #90d3ff;
+            border: 1px solid #90d3ff;
+            border-radius: 20px;
+            transition: 0.3s;
         }
 
         .card-profile .social-links a:hover {
             background-color: #90d3ff;
             color: var(--color-text-primary);
         }
-
-        /* Other Card Styles (Unchanged but included for context) */
 
         .card-header {
             font-size: 1rem;
@@ -146,7 +143,6 @@
             color: var(--color-text-secondary);
         }
         
-        /* Time Display */
         .location-time {
             font-size: 3rem;
             font-weight: 700;
@@ -166,6 +162,10 @@
             .subjects-list ul {
                 columns: 1;
             }
+            .case-study-content {
+                flex-direction: column !!important;
+                gap: 1rem;
+            }
         }
 
         .subjects-list li {
@@ -175,28 +175,58 @@
             break-inside: avoid-column;
         }
 
-        .subjects-list li:last-child {
-            border-bottom: none;
+        /* Case Study Card Layout Adjustment */
+        .case-study-content {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
         }
 
-        /* Case Study / Reflection / Hobby Text */
-        .card-text-content {
-            flex-grow: 1;
+        .case-study-text {
+            flex: 2;
         }
 
-        .case-study-title, .reflection-title {
+        .case-study-action {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* New Button Style */
+        .btn-lab {
+            display: inline-block;
+            background-color: var(--color-accent);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 0px #003366;
+        }
+
+        .btn-lab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 0px #003366;
+            background-color: #0056b3;
+        }
+
+        .btn-lab:active {
+            transform: translateY(0);
+            box-shadow: 0 0px 0px #003366;
+        }
+
+        .case-study-title {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--color-accent);
             margin-bottom: 0.5rem;
         }
 
-        .reflection-content {
-            font-size: 1rem;
-            color: var(--color-text-primary);
-        }
-
-        /* Hobby Card */
+        /* Other Cards */
         .hobby-activity {
             font-size: 1.2rem;
             font-weight: 600;
@@ -211,7 +241,6 @@
             color: var(--color-accent);
         }
 
-        /* Playlist Card (Footer/Wide) */
         .playlist-content {
             font-size: 1.2rem;
             text-align: center;
@@ -231,8 +260,8 @@
                 <h1 class="profile-name">AHMAD HAFIY BIN SHAHRIL EFFENDY</h1>
                 <p class="profile-tagline">'Innovating food safety.'</p>
                 <p class="profile-details">
-                    **Program:** Food Technology (B.Sc.)<br>
-                    **Year:** Year 1
+                    <strong>Program:</strong> Food Technology (B.Sc.)<br>
+                    <strong>Year:</strong> Year 1
                 </p>
                 <div class="social-links">
                     <a href="#" target="_blank">LinkedIn</a>
@@ -263,13 +292,18 @@
                 </div>
             </div>
 
-            <div class="bento-card card-case-study">
-                <div class="card-header"><span class="icon">🔬</span> Recent Project</div>
-                <div class="card-text-content">
-                    <h3 class="case-study-title">Lab Meat using grasshopper</h3>
-                    <p class="card-text-secondary">
-                        Analyzing texture profiles of processed meat derived from alternative protein sources, specifically focusing on grasshopper applications.
-                    </p>
+            <div class="bento-card card-case-study" style="grid-column: span 2;">
+                <div class="card-header"><span class="icon">🧪</span> Recent Project</div>
+                <div class="case-study-content">
+                    <div class="case-study-text">
+                        <h3 class="case-study-title">Lab Meat using grasshopper</h3>
+                        <p class="card-text-secondary">
+                            Analyzing texture profiles of processed meat derived from alternative protein sources, specifically focusing on grasshopper applications.
+                        </p>
+                    </div>
+                    <div class="case-study-action">
+                        <a href="https://s78596.github.io/lab-timer-app/app.html" target="_blank" class="btn-lab">Try My Lab Timer App</a>
+                    </div>
                 </div>
             </div>
 
@@ -283,7 +317,7 @@
             <div class="bento-card card-reflection">
                 <div class="card-header"><span class="icon">💡</span> Reflection</div>
                 <div class="card-text-content reflection-content">
-                    <h3 class="reflection-title">Why Food Tech Matters in Malaysia</h3>
+                    <h3 class="reflection-title" style="font-size: 1.5rem; font-weight: 700; color: var(--color-accent);">Why Food Tech Matters in Malaysia</h3>
                     <p>
                         Sustainable food security is crucial for our future. By optimizing local processing methods, we can reduce waste and improve nutrition.
                     </p>
@@ -291,11 +325,10 @@
             </div>
 
 
-            <div class="bento-card card-playlist">
-                <div class="card-header"><span class="icon">🎧</span> Current Study Playlist</div>
+            <div class="bento-card card-playlist" style="grid-column: span 2;">
+                <div class="card-header"><span class="icon">🎵</span> Current Study Playlist</div>
                 <div class="playlist-content">
-                    [Placeholder for Spotify/Music Player Embed] - Instrumental Jazz for Focus
-<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/44BxdUlHaXPGW8MoZr4soo?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWZeKzbqS3o6s" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </div>
             </div>
 
